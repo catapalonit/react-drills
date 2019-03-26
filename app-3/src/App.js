@@ -3,18 +3,36 @@ import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
+  constructor (){
+    super()
+
+    this.state = {
+      filteredMovies: "",
+      movies: ["Macgruber", "Macgruber", "Macgruber", "Remember the Titans", "Pulp Fiction", "The Big Lebowski"]
+    }
+  }
+
+    handleChange(filter) {
+      this.setState({ filteredMovies: filter })
+    }
+  
   render() {
+    let moviesList = this.state.movies.filter((element, index) => {
+        
+        return element.toLowerCase().includes(this.state.filteredMovies.toLowerCase())
+    })
+    
+    .map((element, index) => {
+      return<h2 key={index}>{element}</h2>
+    })
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <h1>Greatest Movies Of All Time</h1>
+      <input onChange= { (event) => this.handleChange(event.target.value)} type="text"/>
+      {moviesList}
       </div>
-    );
+    )
   }
 }
 

@@ -3,16 +3,25 @@ import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
+  constructor(){
+    super()
+
+    this.state = {
+      words: ""
+    }
+
+this.handleChange = this.handleChange.bind(this)
+}
+handleChange(value){
+  this.setState ( { words : value})
+}
+
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className = "App"> {/* this is because of the css file... has our class as "App" */}
+        <input onChange = { (event) => this.handleChange(event.target.value) } />
+        <p>{this.state.words}</p>
       </div>
     );
   }
